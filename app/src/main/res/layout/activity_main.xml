@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<layout>
+    <data>
+        <import type="codingwithmitch.com.databindinggettingstarted.util.StringUtil" />
+        <import type="codingwithmitch.com.databindinggettingstarted.util.BigDecimalUtil" />
+        <variable
+            name="product"
+            type="codingwithmitch.com.databindinggettingstarted.models.Product" />
+    </data>
+    <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -26,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="10sp"
                 android:textColor="@color/DarkGrey"
-                android:text=""
+                android:text="@{StringUtil.convertIntToString(product.num_ratings)}"
                 android:id="@+id/num_ratings"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
@@ -55,7 +63,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/title"
             android:textColor="@color/Black"
-            android:text=""
+            android:text="@{product.title}"
             android:textSize="14sp"
             android:layout_marginTop="5dp"/>
 
@@ -92,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="16sp"
                 android:textColor="@color/red2"
-                android:text=""
+                android:text="@{product.hasSalePrice() ? BigDecimalUtil.getValue(product.sale_price) : BigDecimalUtil.getValue(product.price)}"
                 android:id="@+id/price"/>
 
 
@@ -104,6 +112,7 @@
                 android:text=""
                 android:id="@+id/original_price"
                 android:layout_marginLeft="10dp"
+                android:visibility="@{product.hasSalePrice() ? View.VISIBLE: View.GONE}"
                 android:background="@drawable/strike_through"/>
 
         </LinearLayout>
@@ -160,4 +169,4 @@
 
     </LinearLayout>
 </RelativeLayout>
-
+</layout>
